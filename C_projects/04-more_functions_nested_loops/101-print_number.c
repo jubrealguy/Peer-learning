@@ -21,7 +21,8 @@ void print_number(int n)
                 {
                         times_ten *=  10;
                 }
-                times_ten /= 10;
+
+		times_ten /= 10;
 
                 while (times_ten >= 1)
                 {
