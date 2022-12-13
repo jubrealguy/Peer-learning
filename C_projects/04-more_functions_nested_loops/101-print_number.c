@@ -16,11 +16,11 @@ void print_number(int n)
 	}
 	times_ten /= 10;
 
-	while (times_ten > 0)
-	{
-		num = n / times_ten;
-		_putchar(num + '0');
-		n = n - (num * times_ten);
-		times_ten /= 10;
-	}
+         while (times_ten >= 1)
+         {
+		 num = n / times_ten;
+		 _putchar(num + '0');
+		 n = n - (num * times_ten);
+		 times_ten /= 10;
+	 }	
 }
