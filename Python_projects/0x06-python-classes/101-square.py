@@ -40,3 +40,14 @@ class Square:
             print(" " * self.position[0], end="")
             print("#", end="")
             print("")
+
+    def __str__(self):
+        string = ""
+        if self.size == 0:
+            return string
+        for i in range(self.position[1]):
+            string += "\n"
+        for square in range(self.size - 1):
+            string += " " * self.position[0] + "#" * self.size + "\n"
+        string += " " * self.position[0] + "#" * self.size
+        return string
