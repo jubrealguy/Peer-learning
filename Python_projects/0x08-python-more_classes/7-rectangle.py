@@ -48,7 +48,8 @@ class Rectangle:
         for i in range(self.height):
             if i == self.height - 1:
                 ans += str(self.print_symbol) * self.width
-            ans += (str(self.print_symbol) * self.width) + "\n"
+            else:
+                ans += (str(self.print_symbol) * self.width) + "\n"
         return ans
 
     def __repr__(self):
