@@ -2,7 +2,8 @@
 
 import cmd
 import shlex
-from models.base_model import BaseModel 
+from models.base_model import BaseModel
+from models import storage
 class HBNBCommand(cmd.Cmd):
     
     prompt = "(hbnb)"
@@ -45,7 +46,7 @@ class HBNBCommand(cmd.Cmd):
                 print("** no instance found **")
             except IndexError:
                 print("** instance id missing **")
-         else:
+        else:
              print("** class name missing **")
 
     def show_obj(self, dic, args):
@@ -92,5 +93,41 @@ class HBNBCommand(cmd.Cmd):
                 print("** class doesn't exist **")
                 return
         print(obj_list)
+
+    def do_update(self, arg):
+        """ Update command that updates an instance """
+        if arg:
+            args = shlex.split(arg)
+            if args[0] not in self.classes.keys():
+                print("** class doesn't exist **")
+                return
+            try:
+                dic = storage.all()
+                obj = dic[args[0] + '.' + args[1]]
+                self.update_value(obj, args)
+                storage.save()
+            except KeyError:
+                print("** no instance found **")
+            except IndexError:
+                print("** instance id missing **")
+        else:
+            print("** class name missing **")
+
+    def update_value(self, obj, args):
+        if len(args) < 3:
+            print("** attribute name missing **")
+            return
+        elif len(args) < 4:
+            print("** value missing **")
+            return
+        try:
+            if hasattr(obj, args[2]):
+                value = type(getattr(obj, args[2]))(args[3])
+                setattr(obj, args[2], value)
+            else:
+                setattr(obj, args[2], args[3])
+        except TypeError:
+            print("** value missing **")
+
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
