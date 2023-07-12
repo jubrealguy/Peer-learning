@@ -3,11 +3,11 @@
 
 int binary_search(int *array, size_t size, int value)
 {
-	int siz = (int)size;
+	int i, siz = (int)size;
 	int low = 0;
 	int high = siz-1;
 	
-	while (low <= high)
+	for (i = low; low <= high; i++)
 	{
 		int mid = low + (high - low)/2;
 
